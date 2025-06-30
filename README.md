@@ -20,7 +20,7 @@ Este é um sistema interativo de escala médica em formato de calendário. O obj
 ## 💰 Regras de Valor
 
 - Médicos com vínculo **Efetivo**: R$ ---.
-- Médicos com vínculo **SPM**:
+- Médicos com vínculo **Particular**:
   - Dias úteis: R$ ---
   - Fins de semana (sábado/domingo): R$ ---
 - Eletivas:
