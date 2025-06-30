@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Escala Médica Interativa</title>
+  <link rel="stylesheet" href="estilo.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h2>Escala Médica - Calendário Interativo</h2>
+
+  <label>Mês:</label>
+  <select id="mes" onchange="renderizarCalendario()">
+    <option value="0">Janeiro</option>
+    <option value="1">Fevereiro</option>
+    <option value="2">Março</option>
+    <option value="3">Abril</option>
+    <option value="4">Maio</option>
+    <option value="5">Junho</option>
+    <option value="6">Julho</option>
+    <option value="7">Agosto</option>
+    <option value="8">Setembro</option>
+    <option value="9">Outubro</option>
+    <option value="10">Novembro</option>
+    <option value="11">Dezembro</option>
+  </select>
+
+  <label>Ano:</label>
+  <input type="number" id="ano" value="2025" onchange="renderizarCalendario()">
+
+  <div class="toolbar">
+    <label for="medico-global">Médico:</label>
+    <select id="medico-global">
+      <option value="">-- Escolha o médico --</option>
+    </select>
+
+    <label for="turno-global">Turno:</label>
+    <select id="turno-global">
+      <option value="">-- Escolha o turno --</option>
+      <option value="diurno">Diurno (07h - 19:00)</option>
+      <option value="noturno">Noturno (19h - 07:00)</option>
+      <option value="eletiva">Eletiva</option>
+    </select>
+
+    <button onclick="aplicarSelecao()">Aplicar aos dias selecionados</button>
+    <button onclick="limparSelecao()">Limpar seleção</button>
+    <button onclick="exportarExcel()">Exportar para Excel</button>
+    <button onclick="limparTodosPlantoes()">Limpar todos os plantões</button>
+
+  </div>
+
+
+<div class="form-medico">
+  <h3>Cadastrar novo médico</h3>
+  <input type="text" id="nome-medico" placeholder="Nome do médico" class="campo-input">
+  <select id="vinculo-medico" class="campo-input">
+    <option value="">-- Selecione o vínculo --</option>
+    <option value="Efetivo">Efetivo</option>
+    <option value="SPM">SPM</option>
+  </select>
+  <button onclick="adicionarMedico()" class="btn-adicionar">Adicionar Médico</button>
+</div>
+
+<div class="lista-medicos" id="lista-medicos">
+  <h3>Médicos cadastrados</h3>
+  <ul id="medicos-ul" class="medicos-ul"></ul>
+</div>
+
+
+
+
+  <div id="legenda" style="margin: 20px 0;">
+  <strong>Legenda de Cores:</strong>
+  <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 10px;">
+    <div><span style="display:inline-block; width:20px; height:20px; background:white; border:1px solid #ccc; vertical-align:middle;"></span> Nenhum plantão</div>
+    <div><span style="display:inline-block; width:20px; height:20px; background:#add8e6; border:1px solid #ccc; vertical-align:middle;"></span> Apenas Diurno</div>
+    <div><span style="display:inline-block; width:20px; height:20px; background:#ffff99; border:1px solid #ccc; vertical-align:middle;"></span> Apenas Noturno</div>
+    <div><span style="display:inline-block; width:20px; height:20px; background:#ffc0cb; border:1px solid #ccc; vertical-align:middle;"></span> Apenas Eletiva</div>
+    <div><span style="display:inline-block; width:20px; height:20px; background:#f4a460; border:1px solid #ccc; vertical-align:middle;"></span> Dois plantões</div>
+    <div><span style="display:inline-block; width:20px; height:20px; background:#90ee90; border:1px solid #ccc; vertical-align:middle;"></span> Três plantões</div>
+  </div>
+</div>
+
+
+
+  <table id="calendario"></table>
+
+  <script src="script.js"></script>
+</body>
+</html>
