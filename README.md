@@ -19,13 +19,13 @@ Este é um sistema interativo de escala médica em formato de calendário. O obj
 
 ## 💰 Regras de Valor
 
-- Médicos com vínculo **Efetivo**: R$ 1000 (valor fixo).
+- Médicos com vínculo **Efetivo**: R$ ---.
 - Médicos com vínculo **SPM**:
-  - Dias úteis: R$ 1375
-  - Fins de semana (sábado/domingo): R$ 1500
+  - Dias úteis: R$ ---
+  - Fins de semana (sábado/domingo): R$ ---
 - Eletivas:
-  - Efetivo: R$ 1000
-  - SPM: R$ 1800
+  - Efetivo: R$ ---
+  - Particular: R$ ---
 
 ## 📦 Exportação
 
