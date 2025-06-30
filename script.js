@@ -59,11 +59,21 @@ function renderizarCalendario() {
     const data = new Date(ano, mes, dia);
     const dataStr = `${ano}-${String(mes + 1).padStart(2, '0')}-${String(dia).padStart(2, '0')}`;
     const td = document.createElement('td');
-    td.innerText = dia;
     td.setAttribute('data-dia', dataStr);
     td.onclick = () => selecionarDia(td);
 
+    // Atualiza a cor do dia
     atualizarCores(td, dataStr);
+
+    // Preenche o número do dia e os médicos atribuídos
+    td.innerHTML = `<strong>${dia}</strong>`;
+    const pl = plantoesManuais[dataStr];
+    if (pl) {
+      if (pl.diurno) td.innerHTML += `<div class="plantao-info">D: ${pl.diurno}</div>`;
+      if (pl.noturno) td.innerHTML += `<div class="plantao-info">N: ${pl.noturno}</div>`;
+      if (pl.eletiva) td.innerHTML += `<div class="plantao-info">E: ${pl.eletiva}</div>`;
+    }
+
     tr.appendChild(td);
 
     if (data.getDay() === 6) {
@@ -78,6 +88,7 @@ function renderizarCalendario() {
 
   atualizarSelectMedicoGlobal();
 }
+
 
 function atualizarSelectMedicoGlobal() {
   const sel = document.getElementById('medico-global');
@@ -119,6 +130,18 @@ function aplicarSelecao() {
     const td = document.querySelector(`td[data-dia='${dataStr}']`);
     if (td) {
       atualizarCores(td, dataStr);
+
+      // Atualiza o conteúdo do dia com nomes dos médicos
+      const dia = parseInt(dataStr.split('-')[2], 10);
+      td.innerHTML = `<strong>${dia}</strong>`;
+
+      const pl = plantoesManuais[dataStr];
+      if (pl) {
+        if (pl.diurno) td.innerHTML += `<div class="plantao-info">D: ${pl.diurno}</div>`;
+        if (pl.noturno) td.innerHTML += `<div class="plantao-info">N: ${pl.noturno}</div>`;
+        if (pl.eletiva) td.innerHTML += `<div class="plantao-info">E: ${pl.eletiva}</div>`;
+      }
+
       td.classList.remove('selected');
     }
   });
@@ -126,13 +149,24 @@ function aplicarSelecao() {
   diasSelecionados = [];
 }
 
+
 function limparSelecao() {
   diasSelecionados.forEach(dataStr => {
+    // Remove os plantões daquele dia (se houver)
+    delete plantoesManuais[dataStr];
+
+    // Atualiza visualmente a célula
     const td = document.querySelector(`td[data-dia='${dataStr}']`);
-    if (td) td.classList.remove('selected');
+    if (td) {
+      td.classList.remove('selected');
+      td.innerHTML = `<strong>${parseInt(dataStr.split('-')[2], 10)}</strong>`;
+      atualizarCores(td, dataStr);
+    }
   });
+
   diasSelecionados = [];
 }
+
 
 
 function limparTodosPlantoes() {

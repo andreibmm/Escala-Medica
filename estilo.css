@@ -74,7 +74,15 @@ th, td {
 
 td[data-dia] {
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  height: 80px; /* aumenta o espaço vertical */
+  vertical-align: top;
+  padding: 4px;
+}
+.plantao-info {
+  font-size: 11px;
+  line-height: 1.3;
+  margin-top: 2px;
+  color: #333;
 }
 
 
